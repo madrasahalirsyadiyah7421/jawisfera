@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ms" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JawiSfera — Penukar Rumi ke Jawi</title>
+  <meta name="description" content="Tukar teks Rumi kepada ejaan Jawi yang tepat mengikut panduan DBP. Dengan pecahan suku kata dan penerangan hukum ejaan Jawi." />
+  <meta name="theme-color" content="#0a0e27" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__icon" aria-hidden="true">
+        <img src="images/logo.png" alt="Logo JawiSfera" />
+      </div>
+      <h1 class="header__title">JawiSfera</h1>
+      <p class="header__subtitle">Penukar Rumi ke Jawi mengikut panduan DBP</p>
+    </header>
+
+    <!-- Input -->
+    <section class="input-section" aria-labelledby="input-label">
+      <label class="input-section__label" id="input-label">
+        <span class="input-section__label-dot" aria-hidden="true"></span>
+        Teks Rumi
+      </label>
+      <textarea
+        id="rumi-input"
+        class="input-section__textarea"
+        placeholder="Taipkan teks Rumi di sini… contoh: Saya suka membaca buku"
+        spellcheck="false"
+        autocomplete="off"
+        aria-describedby="input-label"
+      ></textarea>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="stats-bar">
+      <span class="stats-bar__item">Perkataan: <span id="word-count">0</span></span>
+      <span class="stats-bar__item">Aksara Jawi: <span id="char-count">0</span></span>
+    </div>
+
+    <!-- Jawi Output -->
+    <section class="output-section" aria-labelledby="output-label">
+      <label class="output-section__label" id="output-label">
+        <span class="output-section__label-dot" aria-hidden="true"></span>
+        Tulisan Jawi
+      </label>
+      <div class="output-section__display-wrapper">
+        <!-- No aria-live here: this is rebuilt on every keystroke, which
+             would make a screen reader re-read the whole output as the
+             reader types. The settled result is announced via #jawi-status. -->
+        <div
+          id="jawi-output"
+          class="output-section__display output-section__display--empty"
+          role="group"
+          lang="ms-Arab"
+          dir="rtl"
+          aria-label="Hasil tulisan Jawi. Gunakan anak panah kiri dan kanan untuk memilih perkataan."
+        >تولیسن جاوي اکن ترڤاڤر دي سيني…</div>
+        <button
+          id="copy-btn"
+          class="output-section__copy-btn"
+          title="Salin teks Jawi"
+          aria-label="Salin teks Jawi ke papan keratan"
+          style="display: none;"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Salin
+        </button>
+      </div>
+
+      <!-- Honest about what the engine knows vs what it guessed -->
+      <p class="estimate-notice" id="estimate-notice" hidden></p>
+
+      <!-- Announced only after typing settles, so it isn't read on every key -->
+      <div id="jawi-status" class="sr-only" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- Analysis Section -->
+    <div class="analysis-section analysis-section--hidden" id="analysis-section">
+
+      <!-- Syllable Breakdown -->
+      <section class="card syllable-panel" aria-labelledby="syllable-title">
+        <div class="panel__header">
+          <div class="panel__icon panel__icon--teal" aria-hidden="true">✂</div>
+          <h2 class="panel__title" id="syllable-title">Pecahan Suku Kata</h2>
+          <button type="button" class="panel__action" id="show-all-btn" hidden>Papar semua</button>
+        </div>
+        <div class="syllable-panel__content" id="syllable-content">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Spelling Rules -->
+      <section class="card rules-panel" aria-labelledby="rules-title">
+        <div class="panel__header">
+          <div class="panel__icon panel__icon--gold" aria-hidden="true">📖</div>
+          <h2 class="panel__title" id="rules-title">Hukum Ejaan</h2>
+        </div>
+        <div class="rules-panel__content" id="rules-content">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ═══ Story Section ═══ -->
+    <section class="story-section" aria-labelledby="story-heading">
+      <div class="story-section__header">
+        <div class="story-section__divider" aria-hidden="true"></div>
+        <h2 class="story-section__title" id="story-heading">
+          <span class="story-section__icon" aria-hidden="true">📖</span>
+          Cerita Pendek Jawi
+        </h2>
+        <p class="story-section__subtitle">Pilih tema minat murid untuk membaca cerita pendek dalam ejaan Jawi DBP</p>
+      </div>
+
+      <!-- Topic Selector -->
+      <div class="story-topics" id="story-topics" role="group" aria-label="Pilih tema cerita">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Story Display -->
+      <div class="story-display-section story-display-section--hidden" id="story-display-section">
+        <div class="story-display-wrapper card">
+          <!-- Toolbar -->
+          <div class="story-toolbar">
+            <button id="story-toggle-rumi" class="story-toolbar__btn" data-showing="jawi">Lihat Rumi</button>
+            <button id="story-copy-btn" class="story-toolbar__btn story-toolbar__btn--accent">Salin Cerita</button>
+          </div>
+
+          <!-- Jawi Story -->
+          <div id="story-jawi-display" class="story-display story-display--empty" dir="rtl" lang="ms-Arab" aria-live="polite" aria-label="Cerita Jawi">
+            Pilih tema di atas untuk memaparkan cerita…
+          </div>
+
+          <!-- Rumi Story (hidden toggle) -->
+          <div id="story-rumi-display" class="story-rumi-display" style="display:none;" aria-label="Cerita Rumi">
+          </div>
+        </div>
+
+        <!-- Moral Value -->
+        <div class="story-nilai-card card" id="story-nilai" aria-label="Nilai murni">
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__divider" aria-hidden="true"></div>
+      <p class="footer__text">JawiSfera &middot; Penukaran berdasarkan panduan ejaan Jawi DBP</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
