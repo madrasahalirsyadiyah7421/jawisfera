@@ -11,69 +11,9 @@
 // ──────────────────────────────────────────────
 
 const JAWI_DICT = {
-  // ── Rujukan DBP: Pedoman Umum Ejaan Jawi Bahasa Melayu Dewan ──
-  // 'aksi' has no hamzah — unlike its Arabic-origin neighbours in the
-  // source table, it is a loanword from "action", confirmed against a
-  // clearer photo of the same reference page.
-  'aksi': 'اکسي',
-
-  // ── Rujukan DBP ms.90-92: istilah keislaman & kata serapan Arab ──
-  // Sekumpulan ejaan (adil, ghaib, hakim, waris, zalim) menambah huruf ya
-  // berbanding ejaan asal Arab — pola yang sama menjelaskan pembetulan
-  // "waris" di atas (وارث → واريث).
-  'fasiq': 'فاسق', 'haji': 'حاج', 'hafiz': 'حافظ', 'jamik': 'جامع',
-  'kafir': 'کافر', 'sabit': 'ثابت', 'walid': 'والد', 'ghaib': 'غائيب',
-  'hakim': 'حاکيم', 'zalim': 'ظاليم', 'ijab': 'ايجاب', 'iman': 'ايمان',
-  'kadi': 'قاضي', 'rawi': 'راوي', 'kamus': 'قاموس', 'kanun': 'قانون',
-  'yakut': 'ياقوت', 'baki': 'باقي', 'muharam': 'محرم', 'mukalaf': 'مکلف',
-  'mumaiyiz': 'مميز',
-
-  // ── Awalan se-/ke- + kata dasar bermula huruf vokal (hamzah pada alif),
-  // dan pasangan bentuk dasar/terbitan — rujukan DBP ms.68-71 ──
-  'erti': 'ارتي', 'unit': 'اونيت', 'urus': 'اوروس',
-  'seagama': 'سأݢام', 'seerti': 'سأرتي', 'seorang': 'سأورڠ', 'seunit': 'سأونيت',
-  'keempat': 'کأمڤت', 'keenam': 'کأنم', 'keurus': 'کأوروس',
-  'alam': 'عالم', 'alamiah': 'عالميه',
-  'hadir': 'حاضير', 'hadirin': 'حاضيرين',
-  'jadikan': 'جاديکن', 'seniman': 'سنيمن',
-  'bangsa': 'بڠسا', 'bangsawan': 'بڠساون',
-  'duniawi': 'دنياوي',
-  'sultanah': 'سلطانه', 'muslim': 'مسلم', 'muslimat': 'مسلمات',
-
-  'abadi': 'ابادي', 'abdi': 'عبدي', 'adil': 'عاديل', 'azan': 'اذان',
-  'bacaan': 'باچاءن', 'bahas': 'بحث', 'baja': 'باج', 'batal': 'باطل',
-  'batuk': 'باتوق', 'bawang': 'باوڠ', 'bekal': 'بکل', 'belang': 'بلڠ',
-  'bersih': 'برسيه', 'buang': 'بواڠ', 'buncit': 'بونچيت', 'daif': 'ضعيف',
-  'deru': 'ديرو', 'didik': 'ديديق', 'doa': 'دعاء', 'duda': 'دودا',
-  'duet': 'دوءيت', 'ehwal': 'احوال', 'emak': 'امق', 'fardu': 'فرض',
-  'fasakh': 'فسخ', 'gasing': 'ݢاسيڠ', 'hasrat': 'حسرت', 'helah': 'حيله',
-  'hujung': 'هوجوڠ', 'ibadat': 'عبادة', 'ihsan': 'احسان', 'ikhlas': 'اخلاص',
-  'insaf': 'اءنساف', 'isbat': 'اءثبت', 'izin': 'اءيزين', 'jala': 'جالا',
-  'jambangan': 'جمبڠن', 'jemaah': 'جماعه', 'kapal': 'کڤل', 'kemiskinan': 'کميسکينن',
-  'keruing': 'کروءيڠ', 'khamis': 'خميس', 'kuini': 'کوءيني', 'kurung': 'کوروڠ',
-  'lafaz': 'لافظ', 'lapis': 'لاڤيس', 'lawan': 'لاون', 'lazat': 'لذت',
-  'lemak': 'لماق', 'malaikat': 'ملائکة', 'masalah': 'مسئله', 'misal': 'ميثال',
-  'mizan': 'ميزان', 'muamalat': 'معاملت', 'nikah': 'نکاح', 'nusyuz': 'نشوز',
-  'padat': 'ڤادت', 'paksa': 'ڤقسا', 'pentas': 'ڤنتس', 'pimpinan': 'ڤيمڤينن',
-  'puisi': 'ڤوءيسي', 'pukul': 'ڤوکول', 'qari': 'قاري', 'rawa': 'راوا',
-  'reda': 'ريدا', 'ribut': 'ريبوت', 'rujuk': 'رجوع', 'santan': 'سنتن',
-  'sembahyang': 'سمبهيڠ', 'sibuk': 'سيبوق', 'silat': 'سيلت', 'soal': 'سوءال',
-  'solat': 'صلة', 'subuh': 'صبح', 'sulam': 'سولم', 'syak': 'شق',
-  'sai': 'سعي', 'bidaah': 'بدعة', 'isyak': 'عشاء',
-  'takwa': 'تقوى', 'tambah': 'تمبه', 'tampil': 'تمڤيل', 'tuan': 'توان',
-  'udara': 'اودارا', 'ulama': 'علماء', 'umrah': 'عمرة', 'usrah': 'اءسره',
-  'waris': 'واريث', 'wayang': 'واياڠ', 'zamzam': 'زمزم', 'ziarah': 'زيارة',
-  'zikir': 'ذکر',
-
-  // ── Proper names / Nama khas ──
-  // Names of Arabic origin keep their Arabic spelling (e.g. ح not ه for
-  // "Ahmad") rather than the native-Malay phonetic rules the rule engine
-  // applies to ordinary words — so they live here, not in ruleBasedConvert.
-  'ahmad': 'احمد',
-
   // ── Function words / Kata tugas ──
   'dan': 'دان', 'yang': 'يڠ', 'di': 'دي', 'ini': 'اين',
-  'itu': 'ايتو', 'dengan': 'دڠن', 'untuk': 'اونتوق', 'pada': 'ڤد',
+  'itu': 'ايتو', 'dengan': 'دڠن', 'untuk': 'اونتوق', 'pada': 'ڤدا',
   'adalah': 'اداله', 'dari': 'دري', 'daripada': 'درڤد', 'ke': 'ک',
   'akan': 'اکن', 'tidak': 'تيدق', 'juga': 'جوݢ', 'sudah': 'سوده',
   'telah': 'تله', 'masih': 'ماسيه', 'belum': 'بلوم', 'bukan': 'بوکن',
@@ -103,10 +43,12 @@ const JAWI_DICT = {
   'sambil': 'سمبيل', 'seraya': 'سراي', 'walau': 'والاو',
   'walaupun': 'والاوڤون', 'meskipun': 'مسکيڤون', 'namun': 'نامون',
   'malah': 'ماله', 'bahkan': 'بهکن', 'justeru': 'جوستيرو',
-  'ya': 'يا', // ── Pronouns / Kata ganti nama ──
+  'ya': 'يا', 'bukan': 'بوکن', 'bukan': 'بوکن',
+
+  // ── Pronouns / Kata ganti nama ──
   'saya': 'ساي', 'aku': 'اکو', 'kami': 'کامي', 'kita': 'کيت',
   'dia': 'دي', 'beliau': 'بلياو', 'mereka': 'مريک', 'kamu': 'کامو',
-  'awak': 'اوق', 'engkau': 'اڠکاو', 'anda': 'اندا',
+  'awak': 'اوق', 'engkau': 'ايڠکاو', 'anda': 'اندا',
   'diri': 'ديري', 'sendiri': 'سنديري',
 
   // ── Nouns / Kata nama ──
@@ -116,7 +58,7 @@ const JAWI_DICT = {
   'adik': 'اديق', 'abang': 'ابڠ', 'kakak': 'کاکق',
   'keluarga': 'کلوارݢ', 'kawan': 'کاون', 'sahabat': 'سهابت',
   'rumah': 'رومه', 'pintu': 'ڤينتو', 'tingkap': 'تيڠکڤ',
-  'bilik': 'بيليق', 'dapur': 'داڤور', 'dinding': 'دينديڠ',
+  'bilik': 'بيليق', 'dapur': 'داڤور', 'dinding': 'ديديڠ',
   'lantai': 'لنتاي', 'bumbung': 'بومبوڠ', 'halaman': 'هالامن',
   'air': 'اءير', 'api': 'اڤي', 'tanah': 'تانه', 'angin': 'اڠين',
   'langit': 'لاڠيت', 'bintang': 'بينتڠ', 'bulan': 'بولن',
@@ -128,7 +70,7 @@ const JAWI_DICT = {
   'hari': 'هاري', 'malam': 'مالم', 'pagi': 'ڤاݢي',
   'petang': 'ڤتڠ', 'tengahari': 'تڠهاري', 'waktu': 'وقتو',
   'masa': 'ماس', 'tahun': 'تاهون', 'minggu': 'ميڠݢو',
-  'jam': 'جم', 'minit': 'مينيت', 'saat': 'ساعت',
+  'hari': 'هاري', 'jam': 'جم', 'minit': 'مينيت', 'saat': 'ساعت',
   'negara': 'نݢارا', 'negeri': 'نݢري', 'bandar': 'بندر',
   'kampung': 'کمڤوڠ', 'desa': 'ديسا', 'dunia': 'دنيا',
   'tempat': 'تمڤت', 'jalan': 'جالن', 'lorong': 'لوروڠ',
@@ -186,13 +128,14 @@ const JAWI_DICT = {
   'habis': 'هابيس', 'tamat': 'تامت', 'selesai': 'سلساي',
   'cuba': 'چوب', 'usaha': 'اوساها',
   'tolong': 'تولوڠ', 'bantu': 'بنتو',
-  'bekerja': 'بکرج',
+  'kerja': 'کرج', 'bekerja': 'بکرج',
   'main': 'ماءين', 'bermain': 'برماءين',
   'beli': 'بلي', 'membeli': 'ممبلي',
   'jual': 'جوال', 'menjual': 'منجوال',
   'bayar': 'بايار', 'membayar': 'ممبايار',
   'hantar': 'هنتر', 'menghantar': 'مڠهنتر',
-  'kirim': 'کيريم', 'cari': 'چاري', 'mencari': 'منچاري',
+  'kirim': 'کيريم', 'terima': 'تريما',
+  'cari': 'چاري', 'mencari': 'منچاري',
   'jumpa': 'جومڤ', 'menjumpai': 'منجومڤاي',
   'guna': 'ݢون', 'menggunakan': 'مڠݢوناکن',
   'pakai': 'ڤاکاي', 'memakai': 'مماکاي',
@@ -215,8 +158,8 @@ const JAWI_DICT = {
   'luas': 'لواس', 'sempit': 'سمڤيت',
   'baik': 'بايق', 'buruk': 'بوروق', 'jahat': 'جاهت',
   'cantik': 'چنتيق', 'indah': 'اينده', 'hodoh': 'هودوه',
-  'elok': 'ايلوق',
-  'usang': 'اوسڠ',
+  'elok': 'اليوق',
+  'baru': 'بارو', 'lama': 'لام', 'usang': 'اوسڠ',
   'muda': 'مودا', 'tua': 'توا',
   'cepat': 'چڤت', 'lambat': 'لمبت', 'pantas': 'ڤنتس',
   'kuat': 'کوات', 'lemah': 'لمه', 'keras': 'کراس',
@@ -232,15 +175,16 @@ const JAWI_DICT = {
   'penuh': 'ڤنوه', 'kosong': 'کوسوڠ',
   'betul': 'بتول', 'benar': 'بنر', 'salah': 'ساله',
   'senang': 'سنڠ', 'susah': 'سوسه', 'sukar': 'سوکر',
-  'mudah': 'موده', 'bagus': 'باݢوس', 'hebat': 'هيبت', 'pandai': 'ڤنداي',
+  'mudah': 'موده', 'susah': 'سوسه',
+  'bagus': 'باݢوس', 'hebat': 'هيبت', 'pandai': 'ڤنداي',
   'bodoh': 'بودوه', 'pintar': 'ڤينتر', 'bijak': 'بيجق',
   'miskin': 'ميسکين', 'kaya': 'کاي', 'mahal': 'ماهل',
-  'murah': 'موره', 'percuma': 'ڤرچوم',
+  'murah': 'مورة', 'percuma': 'ڤرچوم',
   'sihat': 'صيحت', 'sakit': 'ساکيت',
 
   // ── Numbers / Nombor ──
   'satu': 'ساتو', 'dua': 'دوا', 'tiga': 'تيݢ',
-  'empat': 'امڤت', 'lima': 'ليم', 'enam': 'انم',
+  'empat': 'ايمڤت', 'lima': 'ليم', 'enam': 'اينم',
   'tujuh': 'توجوه', 'lapan': 'لاڤن', 'sembilan': 'سمبيلن',
   'sepuluh': 'سڤولوه', 'sebelas': 'سبلس',
   'ratus': 'راتوس', 'ribu': 'ريبو', 'juta': 'جوت',
@@ -255,13 +199,15 @@ const JAWI_DICT = {
   'kelas': 'کلس', 'peperiksaan': 'ڤڤريقساءن',
   'cikgu': 'چيقݢو', 'doktor': 'دوکتور', 'polis': 'ڤوليس',
   'raja': 'راج', 'sultan': 'سلطان', 'tuhan': 'توهن',
-  'agama': 'اݢام', 'islam': 'إسلام',
+  'agama': 'اݢام', 'islam': 'اسلام',
   'melayu': 'ملايو', 'malaysia': 'مليسيا',
   'bahasa': 'بهاس', 'perkataan': 'ڤرکاتاءن',
   'huruf': 'حروف', 'ayat': 'ايت',
 
   // ── Time / Greetings ──
-  'selamat': 'سلامت', 'maaf': 'معاف', 'assalamualaikum': 'السلام عليکم',
+  'selamat': 'سلامت', 'terima': 'تريما', 'kasih': 'کاسيه',
+  'maaf': 'معاف', 'tolong': 'تولوڠ',
+  'assalamualaikum': 'السلام عليکم',
 
   // ── Story-related additions ──
   'bola': 'بولا', 'sepak': 'سڤق', 'padang': 'ڤداڠ',
@@ -274,12 +220,14 @@ const JAWI_DICT = {
   'terus': 'تروس', 'menang': 'مناڠ',
   'bahawa': 'بهاوا', 'kejayaan': 'کجاياءن',
   'nama': 'نام', 'bernama': 'برنام',
+  // Nama khas: Ahmad menggunakan ha panjang (ح), bukan ha bulat (ه).
+  'ahmad': 'احمد',
   'comel': 'چومل', 'mandi': 'مندي',
   'memandikan': 'ممنديکن',
   'ubat': 'اوبت', 'sembuh': 'سمبوه',
   'semula': 'سمولا', 'haiwan': 'حيوان',
   'cerita': 'چريتا', 'lari': 'لاري',
-  'ekor': 'ايکور', 'seekor': 'سأيکور',
+  'ekor': 'ايکور', 'seekor': 'سايکور',
   'lukis': 'لوکيس', 'melukis': 'ملوکيس',
   'lukisan': 'لوکيسن', 'seni': 'سني',
   'pertandingan': 'ڤرتنديڠن',
@@ -298,12 +246,34 @@ const JAWI_DICT = {
   'mempunyai': 'ممڤوڽاي', 'kepada': 'کڤد',
   'mulanya': 'مولاڽ', 'kegembiraan': 'کݢمبيراءن',
   'membantu': 'ممبنتو', 'membuka': 'ممبوک',
-  'menjaga': 'منجاݢ', 'berguna': 'برݢونا',
-  'mencuba': 'منچوب', 'perpustakaan': 'ڤرڤوستاکاءن',
-  'kelamaan': 'کلاماءن',
+  'membawa': 'ممباوا', 'memberi': 'ممبري',
+  'menjaga': 'منجاݢ', 'jaga': 'جاݢ',
+  'bermain': 'برماءين', 'berguna': 'برݢونا',
+  'mencuba': 'منچوب', 'melihat': 'مليهت',
+  'perpustakaan': 'ڤرڤوستاکاءن',
+  'lama': 'لام', 'kelamaan': 'کلاماءن',
   'nilai': 'نيلاي', 'murni': 'مورني',
   'ketekunan': 'کتکونن', 'semangat': 'سماڠت',
   'kesabaran': 'کصابرن', 'keberanian': 'کبرانين',
+
+  // ── Guided essay additions ──
+  'karangan': 'کارڠن', 'tajuk': 'تاجوق', 'rangka': 'رڠک',
+  'aktiviti': 'اکتيۏيتي', 'sabtu': 'سبتو', 'ahad': 'احد',
+  'hujung': 'هوجوڠ', 'lalu': 'لالو', 'berpeluang': 'برڤلواڠ',
+  'menyertai': 'مڽرتاءي', 'teruja': 'ترج', 'pengalaman': 'ڤڠالمن',
+  'gotong': 'ݢوتوڠ', 'royong': 'رويوڠ', 'kawasan': 'کاوسن',
+  'bersih': 'برسيه', 'ceria': 'چريا', 'sampah': 'سمڤه',
+  'menyapu': 'مڽاڤو', 'membahagikan': 'ممبهاݢيکن',
+  'kerjasama': 'کرجاسام', 'bekerjasama': 'بکرجاسام',
+  'bertanggungjawab': 'برتڠݢوڠجواب', 'kebersihan': 'کبرسيهن',
+  'mengamalkan': 'مڠعملکن', 'sikap': 'سيکڤ', 'melakukan': 'ملاکوقن',
+  'sesuatu': 'سسواتو', 'pihak': 'ڤيهق', 'menyediakan': 'مڽدياکن',
+  'peralatan': 'ڤرالتن', 'lawatan': 'لاوتن', 'zoo': 'زو',
+  'sukan': 'سوکن', 'acara': 'اچارا', 'peserta': 'ڤسرتا',
+  'hadiah': 'هديه', 'alam': 'عالم', 'sekitar': 'سکيتر',
+  'menjamu': 'منجامو', 'hidangan': 'هيداڠن', 'mengemas': 'مڠمس',
+  'pengunjung': 'ڤڠونجوڠ', 'pelbagai': 'ڤلباݢاي', 'menarik': 'مناريق',
+  'berakhir': 'براخير', 'bangga': 'بڠݢ', 'menjadikan': 'منجاديکن',
 };
 
 // ──────────────────────────────────────────────
@@ -330,29 +300,19 @@ const CONSONANT_MAP = {
 const VOWELS = new Set(['a', 'e', 'i', 'o', 'u']);
 const CONSONANTS_SET = new Set(Object.keys(CONSONANT_MAP));
 
-// Jawi letters that do not join to the letter after them.
-// Decides whether a final open "a" keeps its alif (kuda کودا vs mata مات).
-const NON_CONNECTING = new Set(['ا', 'د', 'ذ', 'ر', 'ز', 'و', 'ۏ', 'ء', 'ژ']);
-
-// Rumi punctuation → Arabic-script equivalents
-const PUNCTUATION_MAP = { ',': '،', ';': '؛', '?': '؟', '(': '﴿', ')': '﴾' };
-
 // ── Words where 'e' is e-taling (é, /e/) not e-pepet (ə) ──
 // Format: { word: [positions of e-taling (0-indexed char positions)] }
 const E_TALING_MAP = {
-  // Removed as e-pepet, not e-taling: emas /əmas/, gerak /gərak/,
-  // keras /kəras/ (the dictionary already spells it کراس, without ya),
-  // teman /təman/, perang /pəraŋ/ (war — pérang "blond" is the rarer sense),
-  // and 'heba', which is not a word.
   'ekor': [0], 'elok': [0], 'esok': [0], 'enak': [0],
-  'ela': [0],
+  'emas': [0], 'ela': [0],
   'meja': [1], 'desa': [1], 'lega': [1], 'mega': [1],
-  'sewa': [1], 'rela': [1], 'bela': [1],
-  'dewan': [1],
-  'lewa': [1], 'lewat': [1],
+  'sewa': [1], 'rela': [1], 'bela': [1], 'heba': [1],
+  'dewan': [1], 'gerak': [1], 'keras': [1],
+  'lewa': [1], 'lewat': [1], 'teman': [1],
   'hewan': [1], 'kera': [1], 'sera': [1],
-  'merah': [1],
+  'merah': [1], 'perang': [1],
   'oleh': [2], 'boleh': [3],
+  'elok': [0],
   'hebat': [1], 'helang': [1],
 };
 
@@ -489,170 +449,121 @@ function splitSyllables(word) {
   return syllables.length > 0 ? syllables : [word];
 }
 
-/**
- * ai / au / oi are one syllable (diftong) when the two vowels are not
- * separated by a coda: pu-la-u → pu-lau, pan-ta-i → pan-tai.
- * They stay apart when a consonant closes the second vowel, which is the
- * hiatus case that takes a hamzah: la-ut (لاءوت), a-ir (اءير), na-ik (ناءيق).
- */
-function mergeDiphthong(sylls) {
-  const out = [];
-  for (const syl of sylls) {
-    const prev = out[out.length - 1];
-    if (prev && (syl === 'i' || syl === 'u')) {
-      const pair = prev[prev.length - 1] + syl;
-      if (pair === 'ai' || pair === 'au' || pair === 'oi') {
-        out[out.length - 1] = prev + syl;
-        continue;
-      }
-    }
-    out.push(syl);
-  }
-  return out;
-}
-
-/**
- * The syllabification used by both the converter and the on-screen
- * "Pecahan Suku Kata" panel, so the two can never disagree.
- */
-function syllabify(word) {
-  return mergeDiphthong(splitSyllables(word));
-}
-
-/**
- * Break one syllable into onset / nucleus / coda, treating digraphs as units.
- */
-function analyseSyllable(syl) {
-  const units = [];
-  let i = 0;
-  while (i < syl.length) {
-    const pair = syl.substr(i, 2);
-    if (DIGRAPHS[pair]) { units.push({ c: pair, v: false }); i += 2; continue; }
-    units.push({ c: syl[i], v: isVowel(syl[i]) });
-    i++;
-  }
-
-  const onset = [], coda = [];
-  let nucleus = '', seen = false;
-  for (const u of units) {
-    if (u.v) { nucleus += u.c; seen = true; }
-    else if (!seen) onset.push(u.c);
-    else coda.push(u.c);
-  }
-  return { onset, nucleus, coda };
-}
-
 // ──────────────────────────────────────────────
 //  4. RULE-BASED JAWI CONVERSION
 // ──────────────────────────────────────────────
 
 /**
- * Map one Rumi consonant (or digraph) to its Jawi letter.
- * Final "k" in a Malay word is a glottal stop, written qaf.
- */
-function mapConsonant(c, isWordFinal) {
-  if (c === 'k' && isWordFinal) return 'ق';
-  if (DIGRAPHS[c]) return DIGRAPHS[c];
-  return CONSONANT_MAP[c] || c;
-}
-
-/**
- * Decide whether a vowel is written, and as what.
- *
- * Jawi does not write every vowel. The DBP convention this implements:
- *   a  — written in an open syllable, dropped in a closed one
- *        (ma-kan → ماکن, ta-nah → تانه, ker-tas → کرتس).
- *        In a final open syllable the alif survives only after a
- *        non-connecting letter (ku-da → کودا, but ma-ta → مات).
- *   i  — always written, ya
- *   u/o— always written, wau
- *   e  — pepet is never written; taling is written as ya
- * A vowel opening the word takes alif as its seat.
- */
-function writeVowel(v, ctx) {
-  switch (v) {
-    case 'a':
-      if (ctx.atWordStart) return 'ا';
-      if (ctx.noOnset) return ctx.open ? 'ا' : '';
-      if (!ctx.isLast) return ctx.open ? 'ا' : '';
-      if (!ctx.open) return '';
-      return NON_CONNECTING.has(ctx.prev) ? 'ا' : '';
-    case 'i':
-      return ctx.atWordStart ? 'اي' : 'ي';
-    case 'u':
-    case 'o':
-      return ctx.atWordStart ? 'او' : 'و';
-    case 'e':
-      if (ctx.isTaling) return ctx.atWordStart ? 'اي' : 'ي';
-      return ctx.atWordStart ? 'ا' : '';
-    default:
-      return '';
-  }
-}
-
-/**
- * Convert a single Rumi word to Jawi by rule, syllable by syllable.
- * This is the fallback when the word isn't in the dictionary — its output
- * is an informed estimate, not a verified DBP spelling, and the UI marks
- * it as such.
+ * Convert a single Rumi word to Jawi using rules.
+ * This is the fallback when the word isn't in the dictionary.
  */
 function ruleBasedConvert(word) {
   const lw = word.toLowerCase();
-  const taling = E_TALING_MAP[lw] || [];
-  const sylls = syllabify(lw);
-  if (!sylls.length) return '';
+  let result = '';
+  let i = 0;
 
-  // character offset of each syllable, so e-taling positions still line up
-  const offsets = [];
-  let acc = 0;
-  for (const s of sylls) { offsets.push(acc); acc += s.length; }
+  while (i < lw.length) {
+    // --- Check for diphthongs at valid positions ---
+    if (i + 1 < lw.length) {
+      const pair = lw.substring(i, i + 2);
 
-  let out = '';
+      // Diphthongs: ai, au, oi
+      if (pair === 'ai' && (i + 2 >= lw.length || !isVowel(lw[i + 2]))) {
+        if (i === 0) result += 'ا';
+        result += 'اي';
+        i += 2;
+        continue;
+      }
+      if (pair === 'au' && (i + 2 >= lw.length || !isVowel(lw[i + 2]))) {
+        if (i === 0) result += 'ا';
+        result += 'او';
+        i += 2;
+        continue;
+      }
+      if (pair === 'oi' && (i + 2 >= lw.length || !isVowel(lw[i + 2]))) {
+        if (i === 0) result += 'ا';
+        result += 'وي';
+        i += 2;
+        continue;
+      }
 
-  for (let si = 0; si < sylls.length; si++) {
-    const { onset, nucleus, coda } = analyseSyllable(sylls[si]);
-    const isFirst = si === 0;
-    const isLast = si === sylls.length - 1;
-    const open = coda.length === 0;
-
-    // Onset
-    for (const c of onset) out += mapConsonant(c, false);
-
-    // Hamzah for two vowels meeting across a syllable break.
-    //   after alif — always      a-ir → اءير, pe-ra-sa-an → ڤراساءن
-    //   after wau  — only before i   du-it → دوءيت, but lu-ar → لوار
-    //   after ya   — never        ke-mu-di-an → کمودين, si-a-pa → سياڤ
-    if (!isFirst && onset.length === 0) {
-      const prev = out.slice(-1);
-      if (prev === 'ا' || (prev === 'و' && nucleus[0] === 'i')) out += 'ء';
-    }
-
-    // Nucleus
-    if (nucleus === 'ai' || nucleus === 'au' || nucleus === 'oi') {
-      out += (nucleus === 'ai' ? 'اي' : nucleus === 'au' ? 'او' : 'وي');
-    } else if (nucleus.length === 1) {
-      const vPos = offsets[si] + onset.join('').length;
-      out += writeVowel(nucleus, {
-        atWordStart: isFirst && onset.length === 0,
-        noOnset: onset.length === 0,
-        isLast,
-        open,
-        prev: out.slice(-1),
-        isTaling: nucleus === 'e' && taling.includes(vPos),
-      });
-    } else {
-      for (const ch of nucleus) {
-        out += writeVowel(ch, { atWordStart: false, noOnset: false, isLast, open, prev: out.slice(-1), isTaling: false });
+      // Digraphs
+      if (DIGRAPHS[pair]) {
+        result += DIGRAPHS[pair];
+        i += 2;
+        continue;
       }
     }
 
-    // Coda
-    for (let ci = 0; ci < coda.length; ci++) {
-      out += mapConsonant(coda[ci], isLast && ci === coda.length - 1);
+    const ch = lw[i];
+
+    // --- Vowels ---
+    if (isVowel(ch)) {
+      const atWordStart = (i === 0);
+      const isETaling = E_TALING_MAP[lw] && E_TALING_MAP[lw].includes(i);
+
+      if (ch === 'a') {
+        if (atWordStart) {
+          result += 'ا';
+        } else {
+          result += 'ا';
+        }
+      } else if (ch === 'i') {
+        if (atWordStart) {
+          result += 'اي';
+        } else {
+          result += 'ي';
+        }
+      } else if (ch === 'u') {
+        if (atWordStart) {
+          result += 'او';
+        } else {
+          result += 'و';
+        }
+      } else if (ch === 'o') {
+        if (atWordStart) {
+          result += 'او';
+        } else {
+          result += 'و';
+        }
+      } else if (ch === 'e') {
+        if (isETaling) {
+          // E-taling: written as ya
+          if (atWordStart) {
+            result += 'اي';
+          } else {
+            result += 'ي';
+          }
+        } else {
+          // E-pepet: not written (but alif at word start)
+          if (atWordStart) {
+            result += 'ا';
+          }
+          // else: skip (e-pepet in middle/end not written)
+        }
+      }
+      i++;
+      continue;
     }
+
+    // --- Consonants ---
+    if (CONSONANT_MAP[ch]) {
+      // Special: final 'k' in Malay words → ق
+      if (ch === 'k' && i === lw.length - 1) {
+        result += 'ق';
+      } else {
+        result += CONSONANT_MAP[ch];
+      }
+      i++;
+      continue;
+    }
+
+    // --- Non-letter characters: pass through ---
+    result += lw[i];
+    i++;
   }
 
-  return out;
+  return result;
 }
 
 // ──────────────────────────────────────────────
@@ -663,24 +574,6 @@ function ruleBasedConvert(word) {
  * Convert a single word from Rumi to Jawi.
  * Priority: dictionary → prefix decomposition → rule-based
  */
-/**
- * Awalan "se-" dan "ke-" berakhir dengan vokal. Apabila kata dasar yang
- * mengikutinya turut bermula dengan alif (a/e/i/u/o di awal kata), dua
- * vokal itu bertembung, dan pertembungan tersebut ditulis dengan hamzah
- * di atas alif (أ), bukan alif kosong (ا) — mengikut Pedoman Umum Ejaan
- * Jawi Bahasa Melayu Dewan (DBP):
- *   ekor ايکور  →  seekor سأيکور   (bukan سايکور)
- *   urus اوروس  →  keurus كأوروس  (bukan كاوروس)
- * Kata terbitan pada rangkaian kata ganda (keempat-empat) tidak terjejas,
- * kerana hanya perkataan pertama itu bertembung terus dengan awalan.
- */
-function fuseVowelPrefix(prefixRumi, stemJawi) {
-  if ((prefixRumi === 'se' || prefixRumi === 'ke') && stemJawi.startsWith('ا')) {
-    return 'أ' + stemJawi.slice(1);
-  }
-  return stemJawi;
-}
-
 function convertWord(word) {
   if (!word) return { jawi: '', method: 'none', rules: [] };
 
@@ -716,7 +609,7 @@ function convertWord(word) {
       // Check stem in dictionary
       if (JAWI_DICT[stem]) {
         const rules = detectRules(lw);
-        return { jawi: pfx.jawi + fuseVowelPrefix(pfx.rumi, JAWI_DICT[stem]), method: 'prefix+dict', rules };
+        return { jawi: pfx.jawi + JAWI_DICT[stem], method: 'prefix+dict', rules };
       }
 
       // Check stem + suffix
@@ -725,7 +618,7 @@ function convertWord(word) {
           const root = stem.slice(0, -sfx.rumi.length);
           if (JAWI_DICT[root]) {
             const rules = detectRules(lw);
-            return { jawi: pfx.jawi + fuseVowelPrefix(pfx.rumi, JAWI_DICT[root]) + sfx.jawi, method: 'prefix+dict+suffix', rules };
+            return { jawi: pfx.jawi + JAWI_DICT[root] + sfx.jawi, method: 'prefix+dict+suffix', rules };
           }
         }
       }
@@ -744,35 +637,30 @@ function convertWord(word) {
 function convertText(text) {
   if (!text.trim()) return { words: [], fullJawi: '' };
 
-  // Letters, digits and everything else are tokenised separately so that
-  // numbers and acronyms survive intact instead of being transliterated.
-  const tokens = text.match(/[A-Za-z]+|[0-9]+(?:[.,][0-9]+)*|[^A-Za-z0-9]+/g) || [];
+  // Split into tokens: words and non-words
+  const tokens = text.match(/[\w]+|[^\w]+/g) || [];
   const results = [];
 
   for (const token of tokens) {
-    if (/^[A-Za-z]+$/.test(token)) {
-      // An all-caps token is an acronym (RM, KL, SPM) — leave it in Rumi.
-      if (token.length > 1 && token === token.toUpperCase()) {
-        results.push({ rumi: token, jawi: token, isWord: false, isLatin: true });
-        continue;
-      }
+    if (/^\w+$/.test(token)) {
       const conversion = convertWord(token);
       results.push({
         rumi: token,
         jawi: conversion.jawi,
         method: conversion.method,
         rules: conversion.rules,
-        syllables: syllabify(token),
+        syllables: splitSyllables(token),
         isWord: true,
       });
-    } else if (/^[0-9]/.test(token)) {
-      // Numbers stay as they are; they are isolated for bidi at render time.
-      results.push({ rumi: token, jawi: token, isWord: false, isLatin: true });
     } else {
-      // Punctuation — swap in the Arabic-script forms
-      let jawiPunc = '';
-      for (const ch of token) jawiPunc += (PUNCTUATION_MAP[ch] || ch);
-      results.push({ rumi: token, jawi: jawiPunc, isWord: false });
+      // Punctuation / spaces — pass through (mirror some punctuation for RTL)
+      let jawiPunc = token;
+      jawiPunc = jawiPunc.replace(/\(/g, '﴿').replace(/\)/g, '﴾');
+      results.push({
+        rumi: token,
+        jawi: jawiPunc,
+        isWord: false,
+      });
     }
   }
 
@@ -790,14 +678,14 @@ const RULE_DB = {
     name: 'Hukum E-Pepet',
     badge: 'E-Pepet',
     desc: 'Huruf e pepet (bunyi "uh" seperti dalam "emak") tidak ditulis dalam ejaan Jawi.',
-    example: '"empat" → امڤت (e tidak ditulis)',
+    example: '"empat" → ايمڤت (e tidak ditulis)',
   },
   'e-taling': {
     id: 'e-taling',
     name: 'Hukum E-Taling',
     badge: 'E-Taling',
     desc: 'Huruf e taling (bunyi "eh" seperti dalam "ekor") ditulis dengan huruf ya (ي) dalam Jawi.',
-    example: '"elok" → ايلوق (e ditulis sebagai ي)',
+    example: '"elok" → اليوق (e ditulis sebagai ي)',
   },
   'vokal-awal': {
     id: 'vokal-awal',
@@ -910,13 +798,6 @@ const RULE_DB = {
     badge: 'Imbuhan',
     desc: 'Awalan "ke-" ditulis sebagai ک dan disambung terus dengan kata dasar.',
     example: '"kedua" → کدوا',
-  },
-  'hamzah-se-ke': {
-    id: 'hamzah-se-ke',
-    name: 'Hamzah pada Awalan se-/ke-',
-    badge: 'Hamzah',
-    desc: 'Apabila awalan "se-" atau "ke-" bertemu kata dasar yang bermula dengan huruf vokal, pertembungan itu ditulis dengan hamzah di atas alif (أ), bukan alif kosong.',
-    example: '"seekor" → سأيکور, "keurus" → كأوروس',
   },
 };
 
@@ -1090,7 +971,6 @@ function detectRules(word) {
   if (/^di[a-z]/.test(lw) && lw.length > 3 && lw !== 'dia' && lw !== 'diri' && lw !== 'diam') add('imbuhan-di');
   if (/^se/.test(lw) && lw.length > 3 && !JAWI_DICT[lw]) add('imbuhan-se');
   if (/^ke/.test(lw) && lw.length > 3 && !JAWI_DICT[lw]) add('imbuhan-ke');
-  if (/^(se|ke)[aeiou]/.test(lw) && lw.length > 3 && !JAWI_DICT[lw]) add('hamzah-se-ke');
 
   return rules;
 }
@@ -1112,8 +992,8 @@ function init() {
 
   copyBtn.addEventListener('click', handleCopy);
 
-  // Word selection: one delegated listener + keyboard navigation
-  initOutputInteraction();
+  // AI-guided essay feature
+  initGuidedEssay();
 
   // Story feature
   initStoryFeature();
@@ -1148,69 +1028,31 @@ function showEmptyState() {
   analysis.classList.add('analysis-section--hidden');
   copyBtn.style.display = 'none';
 
-  currentResult = null;
-  selectedIndex = null;
-  toggleShowAll(false);
-
-  const notice = document.getElementById('estimate-notice');
-  if (notice) notice.hidden = true;
-  const status = document.getElementById('jawi-status');
-  if (status) status.textContent = '';
-  clearTimeout(announceTimer);
-
   document.getElementById('word-count').textContent = '0';
   document.getElementById('char-count').textContent = '0';
 }
-
-// The result currently on screen, so delegated handlers can look words up.
-let currentResult = null;
-let selectedIndex = null;
 
 function displayJawi(result) {
   const output = document.getElementById('jawi-output');
   const analysis = document.getElementById('analysis-section');
   const copyBtn = document.getElementById('copy-btn');
 
-  currentResult = result;
-  selectedIndex = null;
-
   output.classList.remove('output-section__display--empty');
   output.innerHTML = '';
 
-  let firstWord = true;
-
+  // Create clickable word spans
   result.words.forEach((w, idx) => {
     if (w.isWord) {
-      // A span with role=button, not a <button>: a paragraph of 60 words
-      // must not become 60 tab stops. Roving tabindex gives the group one
-      // stop, and arrow keys move between words inside it.
-      const el = document.createElement('span');
-      el.className = 'word-btn';
-      if (w.method === 'rules') el.classList.add('word-btn--estimated');
-      el.textContent = w.jawi;
-      el.dataset.index = idx;
-      el.setAttribute('role', 'button');
-      el.setAttribute('tabindex', firstWord ? '0' : '-1');
-      el.setAttribute('lang', 'ms-Arab');
-      el.title = w.method === 'rules'
-        ? `${w.rumi} — ejaan anggaran, belum disahkan`
-        : w.rumi;
-      el.setAttribute('aria-label', w.method === 'rules'
-        ? `${w.rumi}, ejaan anggaran`
-        : w.rumi);
-      output.appendChild(el);
-      firstWord = false;
+      const btn = document.createElement('button');
+      btn.className = 'word-btn';
+      btn.textContent = w.jawi;
+      btn.dataset.index = idx;
+      btn.title = w.rumi;
+      btn.addEventListener('click', () => highlightWord(result, idx));
+      output.appendChild(btn);
     } else {
       const span = document.createElement('span');
-      // Numbers and acronyms need bidi isolation or they jump around
-      // inside the right-to-left run.
-      if (w.isLatin) {
-        const bdi = document.createElement('bdi');
-        bdi.textContent = w.jawi;
-        span.appendChild(bdi);
-      } else {
-        span.textContent = w.jawi;
-      }
+      span.textContent = w.jawi;
       output.appendChild(span);
     }
   });
@@ -1220,118 +1062,22 @@ function displayJawi(result) {
 
   analysis.classList.remove('analysis-section--hidden');
   copyBtn.style.display = 'flex';
-  updateEstimateNotice(result);
-  announce(result);
 }
 
-/**
- * Tell the reader how much of this conversion is verified and how much
- * the rule engine guessed.
- */
-function updateEstimateNotice(result) {
-  const notice = document.getElementById('estimate-notice');
-  if (!notice) return;
-  const words = result.words.filter(w => w.isWord);
-  const guessed = words.filter(w => w.method === 'rules').length;
+function highlightWord(result, idx) {
+  // Remove existing highlights
+  document.querySelectorAll('.word-btn.active').forEach(b => b.classList.remove('active'));
 
-  if (!guessed) {
-    notice.hidden = true;
-    return;
+  // Add highlight to clicked word
+  const btn = document.querySelector(`.word-btn[data-index="${idx}"]`);
+  if (btn) btn.classList.add('active');
+
+  // Show only this word's syllables and rules
+  const word = result.words[idx];
+  if (word && word.isWord) {
+    displaySyllables([word]);
+    displayRules([word]);
   }
-  notice.hidden = false;
-  notice.textContent = guessed === words.length
-    ? 'Semua perkataan dieja secara anggaran oleh sistem — sila semak dengan Daftar Kata DBP.'
-    : `${guessed} daripada ${words.length} perkataan dieja secara anggaran (bergaris putus-putus) — sila semak dengan Daftar Kata DBP.`;
-}
-
-/**
- * Announce the result once the reader has stopped typing, rather than
- * re-reading the whole output on every keystroke.
- */
-let announceTimer = null;
-function announce(result) {
-  const status = document.getElementById('jawi-status');
-  if (!status) return;
-  clearTimeout(announceTimer);
-  announceTimer = setTimeout(() => {
-    status.textContent = 'Tulisan Jawi: ' + result.fullJawi;
-  }, 1200);
-}
-
-function selectWord(idx) {
-  const word = currentResult && currentResult.words[idx];
-  if (!word || !word.isWord) return;
-
-  // Clicking the selected word again returns to the full list.
-  if (selectedIndex === idx) return clearSelection();
-
-  document.querySelectorAll('.word-btn.active').forEach(b => b.classList.remove('active'));
-  const el = document.querySelector(`.word-btn[data-index="${idx}"]`);
-  if (el) el.classList.add('active');
-  selectedIndex = idx;
-
-  displaySyllables([word]);
-  displayRules([word]);
-  toggleShowAll(true);
-}
-
-function clearSelection() {
-  selectedIndex = null;
-  document.querySelectorAll('.word-btn.active').forEach(b => b.classList.remove('active'));
-  if (!currentResult) return;
-  const words = currentResult.words.filter(w => w.isWord);
-  displaySyllables(words);
-  displayRules(words);
-  toggleShowAll(false);
-}
-
-function toggleShowAll(show) {
-  const btn = document.getElementById('show-all-btn');
-  if (btn) btn.hidden = !show;
-}
-
-/**
- * One delegated listener for the whole output, plus arrow-key navigation
- * between words (right-to-left, so ArrowRight moves to the previous word).
- */
-function initOutputInteraction() {
-  const output = document.getElementById('jawi-output');
-  if (!output) return;
-
-  output.addEventListener('click', (e) => {
-    const el = e.target.closest('.word-btn');
-    if (el) selectWord(Number(el.dataset.index));
-  });
-
-  output.addEventListener('keydown', (e) => {
-    const el = e.target.closest('.word-btn');
-    if (!el) return;
-
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      selectWord(Number(el.dataset.index));
-      return;
-    }
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      clearSelection();
-      return;
-    }
-
-    const step = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0;
-    if (!step) return;
-    e.preventDefault();
-
-    const all = Array.from(output.querySelectorAll('.word-btn'));
-    const next = all[all.indexOf(el) + step];
-    if (!next) return;
-    el.setAttribute('tabindex', '-1');
-    next.setAttribute('tabindex', '0');
-    next.focus();
-  });
-
-  const showAll = document.getElementById('show-all-btn');
-  if (showAll) showAll.addEventListener('click', clearSelection);
 }
 
 function displaySyllables(words) {
@@ -1356,7 +1102,7 @@ function displaySyllables(words) {
     row.className = 'syllable-word';
     row.style.animationDelay = `${i * 50}ms`;
 
-    const syllables = word.syllables || syllabify(word.rumi);
+    const syllables = word.syllables || splitSyllables(word.rumi);
 
     // Rumi word
     const rumiSpan = document.createElement('span');
@@ -1392,11 +1138,7 @@ function displaySyllables(words) {
     // Jawi
     const jawiSpan = document.createElement('span');
     jawiSpan.className = 'syllable-word__jawi';
-    if (word.method === 'rules') jawiSpan.classList.add('syllable-word__jawi--estimated');
-    jawiSpan.setAttribute('lang', 'ms-Arab');
-    jawiSpan.setAttribute('dir', 'rtl');
     jawiSpan.textContent = word.jawi;
-    if (word.method === 'rules') jawiSpan.title = 'Ejaan anggaran — belum disahkan';
     row.appendChild(jawiSpan);
 
     container.appendChild(row);
@@ -1455,35 +1197,10 @@ function displayRules(words) {
 
 function updateStats(result) {
   const wordCount = result.words.filter(w => w.isWord).length;
-  // Count Jawi letters only — not spaces, punctuation or passed-through Latin.
-  const charCount = (result.fullJawi.match(
-    /[ء-غف-يٮ-ۓۺ-ۿݐ-ݿ]/g
-  ) || []).length;
+  const charCount = result.fullJawi.replace(/\s/g, '').length;
 
   document.getElementById('word-count').textContent = wordCount;
   document.getElementById('char-count').textContent = charCount;
-}
-
-const ICON_COPY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
-const ICON_TICK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
-
-/**
- * Copy text, falling back to selecting it when the Clipboard API is
- * unavailable — which it is on plain http:// outside localhost, a very
- * likely setup for a school intranet.
- */
-async function copyText(text, el) {
-  if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(text);
-    return true;
-  }
-  // Fallback: select the text so the reader can copy it themselves.
-  const range = document.createRange();
-  range.selectNodeContents(el);
-  const sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
-  return false;
 }
 
 async function handleCopy() {
@@ -1491,30 +1208,478 @@ async function handleCopy() {
   const copyBtn = document.getElementById('copy-btn');
   const text = output.textContent || output.innerText;
 
-  const restore = () => {
-    copyBtn.classList.remove('copied', 'failed');
-    copyBtn.innerHTML = ICON_COPY + ' Salin';
-  };
-
   try {
-    const copied = await copyText(text, output);
-    if (copied) {
-      copyBtn.classList.add('copied');
-      copyBtn.innerHTML = ICON_TICK + ' Disalin!';
-    } else {
-      copyBtn.classList.add('failed');
-      copyBtn.textContent = 'Teks dipilih — tekan Ctrl+C';
-    }
+    await navigator.clipboard.writeText(text);
+    copyBtn.classList.add('copied');
+    copyBtn.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      Disalin!
+    `;
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyBtn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Salin
+      `;
+    }, 2000);
   } catch (err) {
     console.error('Copy failed:', err);
-    copyBtn.classList.add('failed');
-    copyBtn.textContent = 'Gagal menyalin';
   }
-  setTimeout(restore, 2600);
 }
 
 // ──────────────────────────────────────────────
-//  8. STORY FEATURE
+//  8. AI-GUIDED ESSAY FEATURE
+//     Uses an optional server AI endpoint when configured.
+//     A safe local guided-writing engine keeps the feature
+//     fully usable when the static site is opened offline.
+// ──────────────────────────────────────────────
+
+const ESSAY_GUIDES = [
+  {
+    id: 'gotong-royong',
+    emoji: '🧹',
+    title: 'Gotong-royong di Sekolah',
+    character: 'Saya',
+    place: 'sekolah',
+    value: 'kerjasama',
+    points: [
+      'Guru membahagikan tugas kepada semua murid.',
+      'Kami menyapu sampah dan mengemas kelas bersama-sama.',
+      'Kawasan sekolah menjadi bersih dan ceria.'
+    ]
+  },
+  {
+    id: 'lawatan-zoo',
+    emoji: '🦒',
+    title: 'Lawatan ke Zoo',
+    character: 'Saya',
+    place: 'zoo',
+    value: 'bertanggungjawab',
+    points: [
+      'Kami pergi ke zoo bersama guru dan kawan-kawan.',
+      'Kami melihat pelbagai haiwan yang menarik.',
+      'Guru mengingatkan kami supaya menjaga haiwan.'
+    ]
+  },
+  {
+    id: 'hari-sukan',
+    emoji: '🏅',
+    title: 'Hari Sukan Sekolah',
+    character: 'Saya',
+    place: 'padang sekolah',
+    value: 'berani mencuba',
+    points: [
+      'Semua peserta berkumpul di padang pada waktu pagi.',
+      'Saya menyertai acara lari bersama kawan-kawan.',
+      'Guru menyampaikan hadiah kepada para pemenang.'
+    ]
+  },
+  {
+    id: 'membantu-ibu',
+    emoji: '🍳',
+    title: 'Membantu Ibu di Rumah',
+    character: 'Saya',
+    place: 'rumah',
+    value: 'tolong-menolong',
+    points: [
+      'Saya membantu ibu menyediakan makanan di dapur.',
+      'Saya mengemas meja selepas keluarga selesai makan.',
+      'Ibu berasa gembira dan mengucapkan terima kasih.'
+    ]
+  },
+  {
+    id: 'menanam-pokok',
+    emoji: '🌱',
+    title: 'Menanam Pokok',
+    character: 'Saya',
+    place: 'halaman rumah',
+    value: 'menjaga kebersihan',
+    points: [
+      'Ayah menyediakan anak pokok dan peralatan berkebun.',
+      'Saya menggali tanah lalu menanam anak pokok.',
+      'Kami menyiram pokok supaya tumbuh dengan subur.'
+    ]
+  },
+  {
+    id: 'membaca-buku',
+    emoji: '📚',
+    title: 'Kebaikan Membaca Buku',
+    character: 'Saya',
+    place: 'perpustakaan',
+    value: 'rajin',
+    points: [
+      'Saya memilih buku cerita yang menarik.',
+      'Membaca buku menambah ilmu dan perkataan baharu.',
+      'Saya meminjam buku untuk dibaca di rumah.'
+    ]
+  }
+];
+
+const ESSAY_VALUE_CLOSINGS = {
+  'kerjasama': 'Kita hendaklah bekerjasama supaya tugas menjadi lebih mudah.',
+  'rajin': 'Kita hendaklah rajin berusaha untuk mencapai kejayaan.',
+  'bertanggungjawab': 'Kita hendaklah bertanggungjawab dalam setiap perkara yang dilakukan.',
+  'tolong-menolong': 'Kita mestilah mengamalkan sikap tolong-menolong dalam kehidupan.',
+  'menjaga kebersihan': 'Kita mestilah menjaga kebersihan supaya hidup lebih sihat.',
+  'berani mencuba': 'Kita hendaklah berani mencuba dan tidak mudah putus asa.'
+};
+
+let currentEssay = null;
+let essayGenerationCount = 0;
+
+function initGuidedEssay() {
+  const form = document.getElementById('essay-form');
+  const suggestions = document.getElementById('essay-topic-suggestions');
+  if (!form || !suggestions) return;
+
+  ESSAY_GUIDES.forEach(guide => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'essay-topic-chip';
+    button.dataset.guide = guide.id;
+    button.textContent = `${guide.emoji} ${guide.title}`;
+    button.addEventListener('click', () => applyEssayGuide(guide.id));
+    suggestions.appendChild(button);
+  });
+
+  form.addEventListener('submit', handleEssayGeneration);
+  form.addEventListener('input', () => setEssayStep(2));
+  document.getElementById('essay-suggest-btn').addEventListener('click', suggestEssayPoints);
+  document.getElementById('essay-toggle-rumi').addEventListener('click', toggleEssayRumi);
+  document.getElementById('essay-copy-btn').addEventListener('click', copyEssayJawi);
+  document.getElementById('essay-use-btn').addEventListener('click', useEssayInConverter);
+
+  const endpoint = getEssayAIEndpoint();
+  if (endpoint) {
+    const privacy = form.querySelector('.essay-privacy');
+    privacy.innerHTML = '<span aria-hidden="true">●</span> Mod AI pelayan aktif: input dihantar ke perkhidmatan AI yang dikonfigurasi.';
+  }
+}
+
+function applyEssayGuide(guideId) {
+  const guide = ESSAY_GUIDES.find(item => item.id === guideId);
+  if (!guide) return;
+
+  document.querySelectorAll('.essay-topic-chip').forEach(button => {
+    button.classList.toggle('active', button.dataset.guide === guideId);
+  });
+
+  document.getElementById('essay-topic').value = guide.title;
+  document.getElementById('essay-character').value = guide.character;
+  document.getElementById('essay-place').value = guide.place;
+  document.getElementById('essay-points').value = guide.points.join('\n');
+  document.getElementById('essay-value').value = guide.value;
+  setEssayMessage(`Idea “${guide.title}” sudah diisi. Murid masih boleh mengubah mana-mana bahagian.`, 'info');
+  setEssayStep(2);
+  document.getElementById('essay-points').focus();
+}
+
+function suggestEssayPoints() {
+  const topic = document.getElementById('essay-topic').value.trim().toLowerCase();
+  const matchedGuide = ESSAY_GUIDES.find(guide => {
+    const title = guide.title.toLowerCase();
+    return topic && (title.includes(topic) || topic.includes(title) || title.split(' ').some(word => word.length > 4 && topic.includes(word)));
+  });
+
+  if (matchedGuide) {
+    applyEssayGuide(matchedGuide.id);
+    return;
+  }
+
+  if (!document.getElementById('essay-character').value.trim()) {
+    document.getElementById('essay-character').value = 'Saya';
+  }
+  if (!document.getElementById('essay-place').value.trim()) {
+    document.getElementById('essay-place').value = 'sekolah';
+  }
+
+  document.getElementById('essay-points').value = [
+    'Kami menyediakan peralatan sebelum aktiviti bermula.',
+    'Semua orang bekerjasama melakukan tugas dengan bersungguh-sungguh.',
+    'Aktiviti itu selesai dengan baik dan memberi pengalaman yang berguna.'
+  ].join('\n');
+  setEssayMessage('Tiga isi umum telah dicadangkan. Ubah isi supaya benar-benar sesuai dengan tajuk kamu.', 'info');
+  setEssayStep(2);
+}
+
+function getEssayPayload() {
+  const rawPoints = document.getElementById('essay-points').value;
+  return {
+    topic: cleanEssayText(document.getElementById('essay-topic').value, 80),
+    character: cleanEssayText(document.getElementById('essay-character').value, 40) || 'Saya',
+    place: cleanEssayText(document.getElementById('essay-place').value, 60) || 'sekolah',
+    points: rawPoints
+      .split(/\n|;/)
+      .map(point => normalizeEssaySentence(point))
+      .filter(Boolean)
+      .slice(0, 6),
+    value: document.getElementById('essay-value').value,
+    length: document.getElementById('essay-length').value
+  };
+}
+
+async function handleEssayGeneration(event) {
+  event.preventDefault();
+  const payload = getEssayPayload();
+  const topicInput = document.getElementById('essay-topic');
+
+  topicInput.removeAttribute('aria-invalid');
+  if (!payload.topic) {
+    topicInput.setAttribute('aria-invalid', 'true');
+    setEssayMessage('Masukkan tajuk karangan dahulu atau pilih salah satu idea pantas.');
+    topicInput.focus();
+    return;
+  }
+
+  if (payload.points.length < 2) {
+    setEssayMessage('Masukkan sekurang-kurangnya dua isi penting. Tekan “Cadangkan isi” jika kamu perlukan bantuan.');
+    document.getElementById('essay-points').focus();
+    return;
+  }
+
+  const button = document.getElementById('essay-generate-btn');
+  const originalButton = button.innerHTML;
+  button.disabled = true;
+  button.innerHTML = '<span aria-hidden="true">✦</span> AI sedang menyusun…';
+  setEssayMessage('Menyusun pendahuluan, isi dan penutup…', 'info');
+
+  try {
+    essayGenerationCount += 1;
+    let essay = null;
+    const endpoint = getEssayAIEndpoint();
+
+    if (endpoint) {
+      try {
+        essay = await requestServerEssay(endpoint, payload);
+        setEssayMessage('Karangan berjaya dijana menggunakan AI pelayan.', 'info');
+      } catch (error) {
+        console.warn('AI endpoint unavailable; using local guided writer:', error);
+        essay = buildLocalEssay(payload, essayGenerationCount);
+        setEssayMessage('Sambungan AI tidak tersedia. Draf dibina dengan pembantu setempat.', 'info');
+      }
+    } else {
+      essay = buildLocalEssay(payload, essayGenerationCount);
+      setEssayMessage('Draf siap. Baca semula dan ubah ayat supaya menjadi hasil tulisan kamu sendiri.', 'info');
+    }
+
+    renderEssayResult(essay);
+    setEssayStep(3);
+  } finally {
+    button.disabled = false;
+    button.innerHTML = originalButton;
+  }
+}
+
+function buildLocalEssay(payload, variant = 1) {
+  const topicLower = lowerFirst(payload.topic).replace(/\b(Di|Ke|Dari|Dan)\b/g, word => word.toLowerCase());
+  const characterInSentence = lowerFirst(payload.character);
+  const topicAlreadyNamesPlace = topicLower.toLowerCase().includes(payload.place.toLowerCase());
+  const activityWithPlace = `${topicLower}${topicAlreadyNamesPlace ? '' : ` di ${payload.place}`}`;
+  const introTemplates = [
+    `Pada hari Sabtu yang lalu, ${characterInSentence} berpeluang menyertai ${activityWithPlace}. ${payload.character} berasa gembira dan teruja.`,
+    `Pada hujung minggu yang lalu, ${characterInSentence} menyertai aktiviti ${activityWithPlace}. Aktiviti itu sangat menarik.`,
+    `${payload.character} telah menyertai ${activityWithPlace}. Banyak pengalaman baharu diperoleh melalui aktiviti tersebut.`
+  ];
+  const intro = introTemplates[(variant - 1) % introTemplates.length];
+  const connectors = ['Mula-mula,', 'Kemudian,', 'Selepas itu,', 'Seterusnya,', 'Di samping itu,', 'Akhir sekali,'];
+  const bodySentences = payload.points.map((point, index) => `${connectors[index]} ${lowerFirst(stripSentenceEnd(point))}.`);
+  const valueClosing = ESSAY_VALUE_CLOSINGS[payload.value] || `Kita hendaklah mengamalkan nilai ${payload.value} dalam kehidupan.`;
+  const conclusion = `Akhirnya, aktiviti tersebut selesai dengan baik. ${payload.character} berasa bangga dan gembira. ${valueClosing}`;
+
+  let paragraphs;
+  if (payload.length === 'ringkas') {
+    paragraphs = [intro, `${bodySentences.join(' ')} ${conclusion}`];
+  } else if (payload.length === 'panjang') {
+    const splitAt = Math.max(1, Math.ceil(bodySentences.length / 2));
+    paragraphs = [intro, bodySentences.slice(0, splitAt).join(' '), bodySentences.slice(splitAt).join(' '), conclusion].filter(Boolean);
+  } else {
+    paragraphs = [intro, bodySentences.join(' '), conclusion];
+  }
+
+  return {
+    title: payload.topic,
+    outline: [
+      `Pendahuluan — ${payload.character} menyertai aktiviti di ${payload.place}.`,
+      ...payload.points.map(point => `Isi — ${point}`),
+      `Penutup — Pengajaran tentang ${payload.value}.`
+    ],
+    paragraphs,
+    value: payload.value,
+    source: 'local'
+  };
+}
+
+async function requestServerEssay(endpoint, payload) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        task: 'karangan-berpandu',
+        output: 'Bahasa Melayu Rumi; penukaran Jawi dilakukan oleh aplikasi',
+        audience: 'murid sekolah rendah',
+        ...payload
+      }),
+      signal: controller.signal
+    });
+
+    if (!response.ok) throw new Error(`AI request failed (${response.status})`);
+    const data = await response.json();
+    const paragraphs = Array.isArray(data.paragraphs)
+      ? data.paragraphs
+      : typeof data.text === 'string'
+        ? data.text.split(/\n\s*\n/)
+        : [];
+    const cleanParagraphs = paragraphs
+      .map(paragraph => cleanEssayText(paragraph, 1200))
+      .filter(Boolean)
+      .slice(0, 5);
+
+    if (cleanParagraphs.length < 2) throw new Error('AI response did not contain enough paragraphs');
+
+    return {
+      title: cleanEssayText(data.title, 80) || payload.topic,
+      outline: Array.isArray(data.outline)
+        ? data.outline.map(item => cleanEssayText(item, 180)).filter(Boolean).slice(0, 8)
+        : [`Pendahuluan — ${payload.topic}`, ...payload.points.map(point => `Isi — ${point}`), `Penutup — ${payload.value}`],
+      paragraphs: cleanParagraphs,
+      value: payload.value,
+      source: 'server'
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function renderEssayResult(essay) {
+  currentEssay = {
+    ...essay,
+    jawiParagraphs: essay.paragraphs.map(paragraph => convertText(paragraph).fullJawi)
+  };
+
+  const outlineList = document.getElementById('essay-outline-list');
+  outlineList.innerHTML = '';
+  essay.outline.forEach(item => {
+    const listItem = document.createElement('li');
+    listItem.textContent = item;
+    outlineList.appendChild(listItem);
+  });
+
+  document.getElementById('essay-draft-title').textContent = essay.title;
+
+  const jawiDisplay = document.getElementById('essay-jawi-display');
+  jawiDisplay.innerHTML = '';
+  currentEssay.jawiParagraphs.forEach(paragraph => {
+    const element = document.createElement('p');
+    element.textContent = paragraph;
+    jawiDisplay.appendChild(element);
+  });
+
+  const rumiDisplay = document.getElementById('essay-rumi-display');
+  rumiDisplay.innerHTML = '';
+  essay.paragraphs.forEach(paragraph => {
+    const element = document.createElement('p');
+    element.textContent = paragraph;
+    rumiDisplay.appendChild(element);
+  });
+  rumiDisplay.hidden = true;
+
+  const toggle = document.getElementById('essay-toggle-rumi');
+  toggle.dataset.showing = 'jawi';
+  toggle.textContent = 'Lihat Rumi';
+
+  const wordCount = essay.paragraphs.join(' ').trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('essay-word-count').textContent = `${wordCount} perkataan · ${essay.paragraphs.length} perenggan`;
+
+  const result = document.getElementById('essay-result');
+  result.classList.remove('essay-result--hidden');
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleEssayRumi() {
+  if (!currentEssay) return;
+  const button = document.getElementById('essay-toggle-rumi');
+  const rumiDisplay = document.getElementById('essay-rumi-display');
+  const showingRumi = button.dataset.showing === 'rumi';
+  rumiDisplay.hidden = showingRumi;
+  button.dataset.showing = showingRumi ? 'jawi' : 'rumi';
+  button.textContent = showingRumi ? 'Lihat Rumi' : 'Sembunyikan Rumi';
+}
+
+async function copyEssayJawi() {
+  if (!currentEssay) return;
+  const button = document.getElementById('essay-copy-btn');
+  const text = `${convertText(currentEssay.title).fullJawi}\n\n${currentEssay.jawiParagraphs.join('\n\n')}`;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    button.classList.add('copied');
+    button.textContent = '✓ Disalin!';
+    setTimeout(() => {
+      button.classList.remove('copied');
+      button.textContent = 'Salin Jawi';
+    }, 2000);
+  } catch (error) {
+    console.error('Copy failed:', error);
+    setEssayMessage('Teks tidak dapat disalin secara automatik. Pilih teks Jawi dan salin secara manual.');
+  }
+}
+
+function useEssayInConverter() {
+  if (!currentEssay) return;
+  const input = document.getElementById('rumi-input');
+  input.value = currentEssay.paragraphs.join('\n\n');
+  handleConversion();
+  input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  input.focus({ preventScroll: true });
+}
+
+function getEssayAIEndpoint() {
+  return document.querySelector('meta[name="jawisfera-ai-endpoint"]')?.content.trim() || '';
+}
+
+function setEssayMessage(message, type = 'error') {
+  const element = document.getElementById('essay-form-message');
+  if (!element) return;
+  element.textContent = message;
+  element.classList.toggle('essay-form__message--info', type === 'info');
+}
+
+function setEssayStep(step) {
+  document.querySelectorAll('.essay-step').forEach((element, index) => {
+    element.classList.toggle('essay-step--active', index + 1 === step);
+  });
+}
+
+function cleanEssayText(value, maxLength) {
+  return String(value || '')
+    .replace(/[<>]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, maxLength);
+}
+
+function normalizeEssaySentence(value) {
+  const cleaned = cleanEssayText(value, 180).replace(/^(?:[-•*]|\d+[.)])\s*/, '');
+  if (!cleaned) return '';
+  const sentence = cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+  return /[.!?]$/.test(sentence) ? sentence : `${sentence}.`;
+}
+
+function stripSentenceEnd(value) {
+  return String(value).replace(/[.!?]+$/, '').trim();
+}
+
+function lowerFirst(value) {
+  if (!value) return '';
+  return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
+// ──────────────────────────────────────────────
+//  9. STORY FEATURE
 // ──────────────────────────────────────────────
 
 let currentStory = null;
@@ -1580,22 +1745,17 @@ function selectStory(storyId) {
     const p = document.createElement('p');
     p.className = 'story-paragraph';
     result.words.forEach(w => {
-      const span = document.createElement('span');
       if (w.isWord) {
+        const span = document.createElement('span');
         span.className = 'story-word';
-        if (w.method === 'rules') span.classList.add('story-word--estimated');
         span.textContent = w.jawi;
-        span.title = w.method === 'rules'
-          ? `${w.rumi} — ejaan anggaran`
-          : w.rumi;
-      } else if (w.isLatin) {
-        const bdi = document.createElement('bdi');
-        bdi.textContent = w.jawi;
-        span.appendChild(bdi);
+        span.title = w.rumi;
+        p.appendChild(span);
       } else {
+        const span = document.createElement('span');
         span.textContent = w.jawi;
+        p.appendChild(span);
       }
-      p.appendChild(span);
     });
     jawiDisplay.appendChild(p);
   });
@@ -1614,19 +1774,11 @@ function selectStory(storyId) {
   // Moral value
   const nilaiDisplay = document.getElementById('story-nilai');
   const nilaiJawi = convertText(story.nilai);
-  nilaiDisplay.textContent = '';
-  const mk = (cls, text, attrs) => {
-    const s = document.createElement('span');
-    s.className = cls;
-    s.textContent = text;
-    if (attrs) for (const [k, v] of Object.entries(attrs)) s.setAttribute(k, v);
-    return s;
-  };
-  nilaiDisplay.append(
-    mk('story-nilai__label', '📌 Nilai Murni:'),
-    mk('story-nilai__jawi', nilaiJawi.fullJawi, { lang: 'ms-Arab', dir: 'rtl' }),
-    mk('story-nilai__rumi', story.nilai)
-  );
+  nilaiDisplay.innerHTML = `
+    <span class="story-nilai__label">📌 Nilai Murni:</span>
+    <span class="story-nilai__jawi">${nilaiJawi.fullJawi}</span>
+    <span class="story-nilai__rumi">${story.nilai}</span>
+  `;
 
   // Show the display area
   document.getElementById('story-display-section').classList.remove('story-display-section--hidden');
@@ -1664,18 +1816,17 @@ async function copyStoryJawi() {
   const text = jawiDisplay.textContent || jawiDisplay.innerText;
 
   try {
-    const copied = await copyText(text, jawiDisplay);
-    copyBtn.classList.add(copied ? 'copied' : 'failed');
-    copyBtn.textContent = copied ? '✓ Disalin!' : 'Teks dipilih — tekan Ctrl+C';
+    await navigator.clipboard.writeText(text);
+    copyBtn.classList.add('copied');
+    const original = copyBtn.textContent;
+    copyBtn.textContent = '✓ Disalin!';
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyBtn.textContent = 'Salin Cerita';
+    }, 2000);
   } catch (err) {
     console.error('Copy failed:', err);
-    copyBtn.classList.add('failed');
-    copyBtn.textContent = 'Gagal menyalin';
   }
-  setTimeout(() => {
-    copyBtn.classList.remove('copied', 'failed');
-    copyBtn.textContent = 'Salin Cerita';
-  }, 2600);
 }
 
 // ── Initialize ──

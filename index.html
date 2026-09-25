@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JawiSfera — Penukar Rumi ke Jawi</title>
-  <meta name="description" content="Tukar teks Rumi kepada ejaan Jawi yang tepat mengikut panduan DBP. Dengan pecahan suku kata dan penerangan hukum ejaan Jawi." />
+  <title>JawiSfera — Belajar dan Menulis Jawi</title>
+  <meta name="description" content="Tukar teks Rumi kepada Jawi, pelajari hukum ejaan dan bina karangan pendek Jawi dengan pembantu AI berpandu." />
+  <!-- Isi URL API sendiri untuk menggunakan model AI pelayan. Jika kosong, pembantu pintar setempat akan digunakan. -->
+  <meta name="jawisfera-ai-endpoint" content="" />
   <meta name="theme-color" content="#0a0e27" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -55,16 +57,12 @@
         Tulisan Jawi
       </label>
       <div class="output-section__display-wrapper">
-        <!-- No aria-live here: this is rebuilt on every keystroke, which
-             would make a screen reader re-read the whole output as the
-             reader types. The settled result is announced via #jawi-status. -->
         <div
           id="jawi-output"
           class="output-section__display output-section__display--empty"
-          role="group"
-          lang="ms-Arab"
-          dir="rtl"
-          aria-label="Hasil tulisan Jawi. Gunakan anak panah kiri dan kanan untuk memilih perkataan."
+          role="region"
+          aria-live="polite"
+          aria-label="Hasil tulisan Jawi"
         >تولیسن جاوي اکن ترڤاڤر دي سيني…</div>
         <button
           id="copy-btn"
@@ -77,12 +75,6 @@
           Salin
         </button>
       </div>
-
-      <!-- Honest about what the engine knows vs what it guessed -->
-      <p class="estimate-notice" id="estimate-notice" hidden></p>
-
-      <!-- Announced only after typing settles, so it isn't read on every key -->
-      <div id="jawi-status" class="sr-only" role="status" aria-live="polite"></div>
     </section>
 
     <!-- Analysis Section -->
@@ -93,7 +85,6 @@
         <div class="panel__header">
           <div class="panel__icon panel__icon--teal" aria-hidden="true">✂</div>
           <h2 class="panel__title" id="syllable-title">Pecahan Suku Kata</h2>
-          <button type="button" class="panel__action" id="show-all-btn" hidden>Papar semua</button>
         </div>
         <div class="syllable-panel__content" id="syllable-content">
           <!-- Populated by JS -->
@@ -113,6 +104,122 @@
 
     </div>
 
+    <!-- ═══ AI Guided Essay Section ═══ -->
+    <section class="essay-section" id="karangan-berpandu" aria-labelledby="essay-heading">
+      <div class="essay-section__header">
+        <div class="essay-section__eyebrow"><span aria-hidden="true">✦</span> Pembantu AI</div>
+        <h2 class="essay-section__title" id="essay-heading">Karangan Berpandu</h2>
+        <p class="essay-section__subtitle">Pilih idea, masukkan isi penting, kemudian AI membantu menyusun rangka dan karangan pendek dalam Jawi.</p>
+      </div>
+
+      <div class="essay-builder card">
+        <div class="essay-builder__steps" aria-label="Langkah membina karangan">
+          <span class="essay-step essay-step--active"><b>1</b> Pilih tajuk</span>
+          <span class="essay-step"><b>2</b> Beri isi</span>
+          <span class="essay-step"><b>3</b> Semak karangan</span>
+        </div>
+
+        <form id="essay-form" class="essay-form" novalidate>
+          <fieldset class="essay-fieldset">
+            <legend>Idea pantas</legend>
+            <div class="essay-topic-suggestions" id="essay-topic-suggestions" role="group" aria-label="Cadangan tajuk karangan">
+              <!-- Populated by JS -->
+            </div>
+          </fieldset>
+
+          <div class="essay-form__grid">
+            <label class="essay-field essay-field--wide">
+              <span class="essay-field__label">Tajuk karangan <span aria-hidden="true">*</span></span>
+              <input id="essay-topic" class="essay-field__control" type="text" maxlength="80" placeholder="Contoh: Gotong-royong di sekolah" required />
+            </label>
+
+            <label class="essay-field">
+              <span class="essay-field__label">Watak utama</span>
+              <input id="essay-character" class="essay-field__control" type="text" maxlength="40" placeholder="Contoh: Saya" />
+            </label>
+
+            <label class="essay-field">
+              <span class="essay-field__label">Tempat</span>
+              <input id="essay-place" class="essay-field__control" type="text" maxlength="60" placeholder="Contoh: sekolah" />
+            </label>
+
+            <label class="essay-field essay-field--wide">
+              <span class="essay-field__label">Isi penting <span class="essay-field__hint">Satu isi pada setiap baris</span></span>
+              <textarea id="essay-points" class="essay-field__control essay-field__textarea" rows="4" maxlength="500" placeholder="Kami membahagikan tugas.&#10;Saya menyapu sampah di dalam kelas.&#10;Kawasan sekolah menjadi bersih dan ceria."></textarea>
+            </label>
+
+            <label class="essay-field">
+              <span class="essay-field__label">Nilai murni</span>
+              <select id="essay-value" class="essay-field__control">
+                <option value="kerjasama">Kerjasama</option>
+                <option value="rajin">Rajin</option>
+                <option value="bertanggungjawab">Bertanggungjawab</option>
+                <option value="tolong-menolong">Tolong-menolong</option>
+                <option value="menjaga kebersihan">Menjaga kebersihan</option>
+                <option value="berani mencuba">Berani mencuba</option>
+              </select>
+            </label>
+
+            <label class="essay-field">
+              <span class="essay-field__label">Panjang karangan</span>
+              <select id="essay-length" class="essay-field__control">
+                <option value="ringkas">Ringkas · 2 perenggan</option>
+                <option value="sederhana" selected>Sederhana · 3 perenggan</option>
+                <option value="panjang">Lebih panjang · 4 perenggan</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="essay-form-message" class="essay-form__message" role="alert" aria-live="polite"></div>
+
+          <div class="essay-form__actions">
+            <button type="button" id="essay-suggest-btn" class="essay-btn essay-btn--secondary">
+              <span aria-hidden="true">💡</span> Cadangkan isi
+            </button>
+            <button type="submit" id="essay-generate-btn" class="essay-btn essay-btn--primary">
+              <span aria-hidden="true">✦</span> Bina Karangan Jawi
+            </button>
+          </div>
+
+          <p class="essay-privacy"><span aria-hidden="true">●</span> Mod setempat: idea murid tidak dihantar keluar daripada pelayar.</p>
+        </form>
+      </div>
+
+      <div class="essay-result essay-result--hidden" id="essay-result" aria-live="polite">
+        <section class="essay-outline card" aria-labelledby="essay-outline-title">
+          <div class="essay-result__heading">
+            <span class="essay-result__icon" aria-hidden="true">🧭</span>
+            <div>
+              <span class="essay-result__kicker">Rangka AI</span>
+              <h3 id="essay-outline-title">Susunan idea karangan</h3>
+            </div>
+          </div>
+          <ol id="essay-outline-list" class="essay-outline__list"></ol>
+        </section>
+
+        <section class="essay-draft card" aria-labelledby="essay-draft-title">
+          <div class="essay-draft__toolbar">
+            <div>
+              <span class="essay-result__kicker">Draf siap</span>
+              <h3 id="essay-draft-title" class="essay-draft__title"></h3>
+            </div>
+            <div class="essay-draft__controls">
+              <button type="button" id="essay-toggle-rumi" class="story-toolbar__btn" data-showing="jawi">Lihat Rumi</button>
+              <button type="button" id="essay-copy-btn" class="story-toolbar__btn story-toolbar__btn--accent">Salin Jawi</button>
+            </div>
+          </div>
+
+          <div id="essay-jawi-display" class="essay-draft__jawi" dir="rtl" lang="ms-Arab" aria-label="Karangan dalam tulisan Jawi"></div>
+          <div id="essay-rumi-display" class="essay-draft__rumi" lang="ms" hidden></div>
+
+          <div class="essay-draft__footer">
+            <span id="essay-word-count" class="essay-word-count"></span>
+            <button type="button" id="essay-use-btn" class="essay-use-btn">Semak ejaan perkataan ↑</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
     <!-- ═══ Story Section ═══ -->
     <section class="story-section" aria-labelledby="story-heading">
       <div class="story-section__header">
@@ -121,7 +228,7 @@
           <span class="story-section__icon" aria-hidden="true">📖</span>
           Cerita Pendek Jawi
         </h2>
-        <p class="story-section__subtitle">Pilih tema minat murid untuk membaca cerita pendek dalam ejaan Jawi DBP</p>
+        <p class="story-section__subtitle">Pilih tema minat murid untuk menjana cerita pendek dalam ejaan Jawi DBP</p>
       </div>
 
       <!-- Topic Selector -->
@@ -139,8 +246,8 @@
           </div>
 
           <!-- Jawi Story -->
-          <div id="story-jawi-display" class="story-display story-display--empty" dir="rtl" lang="ms-Arab" aria-live="polite" aria-label="Cerita Jawi">
-            Pilih tema di atas untuk memaparkan cerita…
+          <div id="story-jawi-display" class="story-display story-display--empty" dir="rtl" aria-live="polite" aria-label="Cerita Jawi">
+            Pilih tema di atas untuk menjana cerita…
           </div>
 
           <!-- Rumi Story (hidden toggle) -->
